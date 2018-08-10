@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import PhoneDisplay from './components/PhoneDisplay';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "./actions/PhoneList";
+import "./App.css";
+import HeroPhone from "./components/HeroPhone";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchList();
+  }
   render() {
     return (
       <div className="App">
         <h1>Test</h1>
-        <PhoneDisplay />
+        {this.props.list.map((phone, index) => {
+          return <HeroPhone phone={phone} key={"hero_phone_" + index} />;
+        })}
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps({ PhoneList }) {
+  return PhoneList;
+}
+export default connect(mapStateToProps, actions)(App);
