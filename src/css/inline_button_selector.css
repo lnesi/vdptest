@@ -1,0 +1,28 @@
+.inline_button_selector__button {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	border: 1px solid #c3c3c3;
+	border-radius: 10px;
+	cursor: pointer;
+	padding: 9px 8px;
+	text-align: center;
+	font-size: 14px;
+	background-color:#f4f4f4;
+}
+.inline_button_selector__button__border {
+	border: 2px solid transparent;
+	padding: 2px;
+	border-radius: 10px;
+}
+.inline_button_selector__button__border.selected {
+	border: 2px solid #007c92;
+}
+.inline_button_selector ul {
+	list-style: none;
+	padding: 0;
+}
+.inline_button_selector li {
+	display: inline-block;
+	margin-right: 10px;
+}

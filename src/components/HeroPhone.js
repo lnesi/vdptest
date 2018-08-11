@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import Ratings from "react-ratings-declarative";
-import ColorSelector from "./ColorSelector";
-import CapacitySelector from "./CapacitySelector";
-import '../css/hero_phone.css';
+import ColorSelectorItem from './ColorSelectorItem';
+import InlineButtonSelector from "./InlineButtonSelector";
+import PriceDetails from './PriceDetails'
+import "../css/hero_phone.css";
+
+
 
 class HeroPhone extends Component {
     static getDerivedStateFromProps(props, state) {
@@ -13,7 +16,7 @@ class HeroPhone extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentColor: 1,
+            currentColor: 0,
             currentCapacity: 0,
             details: {
                 colours: [],
@@ -34,9 +37,15 @@ class HeroPhone extends Component {
         });
         return phone;
     }
+    onColorChange(index) {
+        this.setState({ currentColor: index });
+    }
+
+    onCapacityChange(index) {
+        this.setState({ currentCapacity: index });
+    }
 
     render() {
-        console.log("phone", this.props.phone, this.state.details);
         if (
             this.props.phone &&
             this.state.details.colours &&
@@ -56,11 +65,10 @@ class HeroPhone extends Component {
                             />
                         </div>
                         <div className="col-sm-6 text-left">
-                            <h1>{this.getPhoneByDetails().displayName}</h1>
-                            <p>{this.getPhoneByDetails().displayDescription}</p>
+                            <h1>{this.props.phone.groupName}</h1>
                             <div>
                                 <Ratings
-                                    rating={4.2}
+                                    rating={parseFloat(this.props.phone.rating)}
                                     widgetRatedColors="rgb(254, 203,0)"
                                     widgetDimensions="25px"
                                     widgetSpacings="0px"
@@ -72,22 +80,48 @@ class HeroPhone extends Component {
                                     <Ratings.Widget />
                                 </Ratings>
                             </div>
+                            <p>{this.getPhoneByDetails().displayDescription}</p>
+                            
                             <div className="row">
                                 <div className="col-sm-6">
-                                    <ColorSelector
-                                        colours={this.state.details.colours}
-                                        currentColor={this.state.currentColor}
+                                    <InlineButtonSelector
+                                        label="Color"
+                                        className="color_selector"
+                                        value={
+                                            this.state.details.colours[
+                                                this.state.currentColor
+                                            ].name
+                                        }
+                                        valueProp="hex"
+                                        itemList={this.state.details.colours}
+                                        itemClass={ColorSelectorItem}
+                                        currentIndex={this.state.currentColor}
+                                        onChange={this.onColorChange.bind(this)}
                                     />
                                 </div>
                                 <div className="col-sm-6">
-                                    <CapacitySelector
-                                        capacities={
-                                            this.state.details.capacities
+                                    <InlineButtonSelector
+                                        label="Capacity"
+                                        className="capacity_selector"
+                                        value={
+                                            this.state.details.capacities[
+                                                this.state.currentCapacity
+                                            ].label
                                         }
-                                        currentCapacity={
+                                        labelProp="value"
+                                        itemList={this.state.details.capacities}
+                                        currentIndex={
                                             this.state.currentCapacity
                                         }
+                                        onChange={this.onCapacityChange.bind(
+                                            this
+                                        )}
                                     />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <PriceDetails priceInfo={this.getPhoneByDetails().priceInfo} />
                                 </div>
                             </div>
                         </div>

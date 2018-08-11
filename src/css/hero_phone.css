@@ -1,9 +1,29 @@
 .hero_phone {
 	font-family: "VodafoneRegularLite";
-	max-width: 900px;
 }
 
-.hero_phone img{
-	max-width:250px;
-	
+.hero_phone img {
+	max-width: 250px;
+}
+
+.price_details{
+	background-color: #f4f4f4;
+	padding: 20px 30px;
+	line-height: 1.5em;
+	margin-top: 3em;
+}
+
+.price_details .col:nth-child(2){
+	border-left: 1px solid #c3c3c3
+}
+
+.price_details span{
+	font-family: VodafoneRegularBold;
+	color:#e60000;
+	font-size: 2em;
+}
+
+.price_details .col{
+	box-sizing: content-box;
+	padding: 20px 20px;
 }
