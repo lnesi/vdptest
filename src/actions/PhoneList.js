@@ -3,7 +3,7 @@ import axios from "axios";
 
 export function fetchList() {
 	return dispatch => {
-		axios.get("/data/phones.json").then(response => {
+		axios.get("data/phones.json").then(response => {
 			dispatch({ type: PHONE_LIST_FETCH, payload: response.data });
 		});
 	};
