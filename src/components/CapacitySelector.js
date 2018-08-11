@@ -6,11 +6,7 @@ class CapacitySelector extends Component {
             <div className="capacity_selecgtor">
                 <div>
                     Capacity:{" "}
-                    {
-                        this.props.capacities[
-                            this.props.currentCapacity
-                        ].label
-                    }
+                    {this.props.capacities[this.props.currentCapacity].label}
                 </div>
                 <ul>
                     {this.props.capacities.map((c, i) => {
@@ -29,4 +25,4 @@ class CapacitySelector extends Component {
     }
 }
 
-export default CapacitySelector
+export default CapacitySelector;

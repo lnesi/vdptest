@@ -4,8 +4,7 @@ class ColorSelector extends Component {
     render() {
         return (
             <div className="color_selector">
-                Colour:{" "}
-                {this.props.colours[this.props.currentColor].name}
+                Colour: {this.props.colours[this.props.currentColor].name}
                 <ul>
                     {this.props.colours.map((c, i) => {
                         return (

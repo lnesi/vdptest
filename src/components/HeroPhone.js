@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import _ from "lodash";
-
-import ColorSelector from './ColorSelector';
-import CapacitySelector from './CapacitySelector';
-
-
+import Ratings from "react-ratings-declarative";
+import ColorSelector from "./ColorSelector";
+import CapacitySelector from "./CapacitySelector";
+import '../css/hero_phone.css';
 
 class HeroPhone extends Component {
     static getDerivedStateFromProps(props, state) {
@@ -38,9 +37,13 @@ class HeroPhone extends Component {
 
     render() {
         console.log("phone", this.props.phone, this.state.details);
-        if (this.props.phone) {
+        if (
+            this.props.phone &&
+            this.state.details.colours &&
+            this.state.details.capacities
+        ) {
             return (
-                <div className="phone_display container">
+                <div className="hero_phone container">
                     <div className="row">
                         <div className="col-sm-6">
                             <img
@@ -49,17 +52,43 @@ class HeroPhone extends Component {
                                         this.state.currentColor
                                     ].merchandisingMedia[0].value
                                 }
-                                width="100%r"
+                                width="100%"
                             />
                         </div>
                         <div className="col-sm-6 text-left">
                             <h1>{this.getPhoneByDetails().displayName}</h1>
                             <p>{this.getPhoneByDetails().displayDescription}</p>
                             <div>
-                                <ColorSelector colours={this.state.details.colours} currentColor={this.state.currentColor}/>
+                                <Ratings
+                                    rating={4.2}
+                                    widgetRatedColors="rgb(254, 203,0)"
+                                    widgetDimensions="25px"
+                                    widgetSpacings="0px"
+                                >
+                                    <Ratings.Widget />
+                                    <Ratings.Widget />
+                                    <Ratings.Widget />
+                                    <Ratings.Widget />
+                                    <Ratings.Widget />
+                                </Ratings>
                             </div>
-                            <div>
-                                <CapacitySelector capacities={this.state.details.capacities} currentCapacity={this.state.currentCapacity}/>
+                            <div className="row">
+                                <div className="col-sm-6">
+                                    <ColorSelector
+                                        colours={this.state.details.colours}
+                                        currentColor={this.state.currentColor}
+                                    />
+                                </div>
+                                <div className="col-sm-6">
+                                    <CapacitySelector
+                                        capacities={
+                                            this.state.details.capacities
+                                        }
+                                        currentCapacity={
+                                            this.state.currentCapacity
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
