@@ -71,3 +71,74 @@ it("renders the correct initial color image ", () => {
 	).to.equal(phoneDetails.colours[0].merchandisingMedia[0].value);
 });
 
+it("renders the correct initial color label ", () => {
+	const wrapper = Enzyme.mount(<HeroPhone phone={data[0]} />);
+	expect(wrapper.find("img")).to.exist;
+	expect(
+		wrapper
+			.find(".color_selector")
+			.find("strong")
+			.html()
+	).to.contains(phoneDetails.colours[0].name);
+});
+
+it("renders the correct initial memory ", () => {
+	const wrapper = Enzyme.mount(<HeroPhone phone={data[0]} />);
+	expect(wrapper.find("img")).to.exist;
+	expect(
+		wrapper
+			.find(".capacity_selector")
+			.find("strong")
+			.html()
+	).to.contains(phoneDetails.capacities[0].label);
+});
+
+it("does it change the image on mouseover", () => {
+	const wrapper = Enzyme.mount(<HeroPhone phone={data[0]} />);
+
+	wrapper
+		.find(".color_selector")
+		.find(".color_selector__item__button")
+		.at(1)
+		.simulate("mouseover");
+	expect(
+		wrapper
+			.find("img")
+			.getDOMNode()
+			.getAttribute("src")
+	).to.equal(phoneDetails.colours[1].merchandisingMedia[0].value);
+});
+
+it("does it change the color label on mouseover", () => {
+	const wrapper = Enzyme.mount(<HeroPhone phone={data[0]} />);
+
+	wrapper
+		.find(".color_selector")
+		.hostNodes()
+		.find(".color_selector__item__button")
+		.at(1)
+		.simulate("mouseover");
+	expect(
+		wrapper
+			.find(".color_selector")
+			.find("strong")
+			.html()
+	).to.contains(phoneDetails.colours[1].name);
+});
+
+it("does it change the capacity label on mouseover", () => {
+	const wrapper = Enzyme.mount(<HeroPhone phone={data[0]} />);
+
+	wrapper
+		.find(".capacity_selector")
+		.hostNodes()
+		.find(".inline_button_selector__button")
+		.at(1)
+		.simulate("mouseover");
+	expect(
+		wrapper
+			.find(".capacity_selector")
+			.find("strong")
+			.html()
+	).to.contains(phoneDetails.capacities[1].label);
+});

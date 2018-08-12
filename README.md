@@ -48,14 +48,19 @@ npm run test
   ✓ it renders hero_phone (21ms)
  
  PASS  src/components/HeroPhone.test.js
-  ✓ it renders (38ms)
-  ✓ allows us to read and set props (22ms)
-  ✓ renders the title (25ms)
-  ✓ renders the image (29ms)
-  ✓ renders the rate component (23ms)
-  ✓ renders color selector (18ms)
-  ✓ renders capacity selector (20ms)
-  ✓ renders price details (19ms)
-  ✓ renders the correct initial color image  (25ms)
+  ✓ it renders (23ms)
+  ✓ allows us to read and set props (20ms)
+  ✓ renders the title (21ms)
+  ✓ renders the image (17ms)
+  ✓ renders the rate component (18ms)
+  ✓ renders color selector (16ms)
+  ✓ renders capacity selector (17ms)
+  ✓ renders price details (15ms)
+  ✓ renders the correct initial color image  (21ms)
+  ✓ renders the correct initial color label  (25ms)
+  ✓ renders the correct initial memory  (20ms)
+  ✓ does it change the image on mouseover (25ms)
+  ✓ does it change the color label on mouseover (22ms)
+  ✓ does it change the capacity label on mouseover (31ms)
 ```
 
