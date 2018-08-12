@@ -40,10 +40,11 @@ npm run test
 ```
 
 #### Results
+```
  PASS  src/App.test.js
   ✓ it renders (25ms)
   ✓ allows us to read and set props (1ms)
   ✓ calls componentDidMount (21ms)
   ✓ it renders hero_phone (21ms)
-
+```
 
