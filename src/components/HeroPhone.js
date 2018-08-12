@@ -1,22 +1,31 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import Ratings from "react-ratings-declarative";
-import ColorSelectorItem from './ColorSelectorItem';
+import ColorSelectorItem from "./ColorSelectorItem";
 import InlineButtonSelector from "./InlineButtonSelector";
-import PriceDetails from './PriceDetails'
+import PriceDetails from "./PriceDetails";
 import "../css/hero_phone.css";
-
-
+import PropTypes from "prop-types";
+import { getPhoneDetails, getPhoneByDetails } from "../helpers";
 
 class HeroPhone extends Component {
     static getDerivedStateFromProps(props, state) {
-        return { details: getDetails(props.phone) };
+        const details = getPhoneDetails(props.phone);
+        const currentColorName = details.colours[state.currentColor].name;
+        const currentMemory = details.capacities[state.currentCapacity].label;
+
+        return {
+            details,
+            currentColorName,
+            currentMemory
+        };
     }
 
     constructor(props) {
         super(props);
         this.state = {
             currentColor: 0,
+            currentColorName: "",
+            currentMemory: "",
             currentCapacity: 0,
             details: {
                 colours: [],
@@ -25,18 +34,6 @@ class HeroPhone extends Component {
         };
     }
 
-    getPhoneByDetails() {
-        const phone = _.find(this.props.phone.deviceSummary, p => {
-            return (
-                p.colourName ===
-                    this.state.details.colours[this.state.currentColor].name &&
-                p.memory ===
-                    this.state.details.capacities[this.state.currentCapacity]
-                        .label
-            );
-        });
-        return phone;
-    }
     onColorChange(index) {
         this.setState({ currentColor: index });
     }
@@ -81,8 +78,16 @@ class HeroPhone extends Component {
                                     <Ratings.Widget />
                                 </Ratings>
                             </div>
-                            <p>{this.getPhoneByDetails().displayDescription}</p>
-                            
+                            <p>
+                                {
+                                    getPhoneByDetails(
+                                        this.props.phone,
+                                        this.state.currentColorName,
+                                        this.state.currentMemory
+                                    ).displayDescription
+                                }
+                            </p>
+
                             <div className="row">
                                 <div className="col-sm-6">
                                     <InlineButtonSelector
@@ -122,7 +127,15 @@ class HeroPhone extends Component {
                             </div>
                             <div className="row">
                                 <div className="col">
-                                    <PriceDetails priceInfo={this.getPhoneByDetails().priceInfo} />
+                                    <PriceDetails
+                                        priceInfo={
+                                            getPhoneByDetails(
+                                                this.props.phone,
+                                                this.state.currentColorName,
+                                                this.state.currentMemory
+                                            ).priceInfo
+                                        }
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -133,36 +146,8 @@ class HeroPhone extends Component {
     }
 }
 
-function getDetails(phone) {
-    const details = {
-        colours: [],
-        capacities: []
-    };
-
-    const colorGroups = _.keyBy(phone.deviceSummary, item => {
-        return item.colourName;
-    });
-
-    Object.keys(colorGroups).forEach(function(k) {
-        details.colours.push({
-            name: colorGroups[k].colourName,
-            hex: colorGroups[k].colourHex,
-            merchandisingMedia: colorGroups[k].merchandisingMedia
-        });
-    });
-
-    const capacityGroups = _.keyBy(phone.deviceSummary, item => {
-        return item.memory;
-    });
-
-    Object.keys(capacityGroups).forEach(function(k) {
-        details.capacities.push({
-            label: capacityGroups[k].memory,
-            value: capacityGroups[k].memory.replace("GB", "")
-        });
-    });
-
-    return details;
-}
+HeroPhone.propTypes = {
+    phone: PropTypes.object.isRequired
+};
 
 export default HeroPhone;

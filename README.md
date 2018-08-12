@@ -46,5 +46,16 @@ npm run test
   ✓ allows us to read and set props (1ms)
   ✓ calls componentDidMount (21ms)
   ✓ it renders hero_phone (21ms)
+ 
+ PASS  src/components/HeroPhone.test.js
+  ✓ it renders (38ms)
+  ✓ allows us to read and set props (22ms)
+  ✓ renders the title (25ms)
+  ✓ renders the image (29ms)
+  ✓ renders the rate component (23ms)
+  ✓ renders color selector (18ms)
+  ✓ renders capacity selector (20ms)
+  ✓ renders price details (19ms)
+  ✓ renders the correct initial color image  (25ms)
 ```
 
