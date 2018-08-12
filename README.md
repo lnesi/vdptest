@@ -1,4 +1,4 @@
-# Vodaphone Technical Test FE
+# Vodafone Technical Test FE
 
 ## Demo
 
