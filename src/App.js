@@ -6,16 +6,24 @@ import HeroPhone from "./components/HeroPhone";
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchList();
+    if (!this.props.list) this.props.fetchList();
   }
   render() {
-    return (
-      <div className="App">
-        {this.props.list.map((phone, index) => {
-          return <HeroPhone phone={phone} key={"hero_phone_" + index} />;
-        })}
-      </div>
-    );
+    if (this.props.list) {
+      return (
+        <div className="App">
+          {this.props.list.map((phone, index) => {
+            return <HeroPhone phone={phone} key={"hero_phone_" + index} />;
+          })}
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <div>Loading</div>
+        </div>
+      );
+    }
   }
 }
 

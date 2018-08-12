@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import '../css/inline_button_selector.css'
-import PropTypes from 'prop-types';
+import "../css/inline_button_selector.css";
+import PropTypes from "prop-types";
 
 function SelectorItem(props) {
     const selectedClass = props.selected ? "selected" : "";
     return (
-        <div className={"inline_button_selector__button__border " + selectedClass}>
+        <div
+            className={
+                "inline_button_selector__button__border " + selectedClass
+            }
+        >
             <div
                 onMouseOver={() => {
                     props.onChange(props.index);
@@ -22,7 +26,7 @@ class InlineButtonSelector extends Component {
     render() {
         const ItemClass = this.props.itemClass;
         return (
-            <div className={this.props.className+" inline_button_selector"}>
+            <div className={this.props.className + " inline_button_selector"}>
                 {this.props.label}: <strong>{this.props.value}</strong>
                 <ul>
                     {this.props.itemList.map((c, i) => {
@@ -47,14 +51,19 @@ class InlineButtonSelector extends Component {
     }
 }
 InlineButtonSelector.propTypes = {
-  itemClass: PropTypes.element
+    label: PropTypes.string,
+    value: PropTypes.string,
+    labelProp: PropTypes.string,
+    valueProp: PropTypes.string,
+    currentIndex: PropTypes.number,
+    className: PropTypes.string
 };
-InlineButtonSelector.defaultProps={
-    labelProp:'label',
-    valueProp:'value',
-    currentIndex:0,
-    className:'',
-    itemClass:SelectorItem
-
-}
+InlineButtonSelector.defaultProps = {
+    labelProp: "label",
+    valueProp: "value",
+    currentIndex: 0,
+    className: "",
+    itemClass: SelectorItem,
+    onChange:()=>{}
+};
 export default InlineButtonSelector;

@@ -61,6 +61,7 @@ class HeroPhone extends Component {
                                         this.state.currentColor
                                     ].merchandisingMedia[0].value
                                 }
+                                alt={this.props.phone.groupName}
                                 width="100%"
                             />
                         </div>
